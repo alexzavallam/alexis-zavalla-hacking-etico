@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Alexis Zavalla — Hacking ético</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#CFCFC6;--ink:#0A0A0A;--blue:#1626FF;--orange:#FF5B00;--white:#F6F6EE;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#222221;--ink:#E9E9DF;--white:#0A0A0A;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#222221;--ink:#E9E9DF;--white:#0A0A0A;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1rem/1.55 "Space Mono",ui-monospace,monospace;overflow-x:hidden;
+background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .28 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>")}
+h1,h2,h3{font-family:"Archivo Black",Impact,sans-serif;font-weight:400;margin:0;text-transform:uppercase;line-height:.88;letter-spacing:-.03em}
+a{color:inherit}
+:focus-visible{outline:4px solid var(--orange);outline-offset:3px}
+.top{display:flex;justify-content:space-between;align-items:center;border-bottom:4px solid var(--ink);padding:.7rem 1rem;font-weight:700;background:var(--orange);color:#0A0A0A}
+.top nav{display:flex;gap:1rem}
+.top a{text-decoration:none;border-bottom:3px solid transparent}.top a:hover{border-color:#0A0A0A}
+.strip{background:#0A0A0A;color:var(--orange);border-bottom:4px solid var(--ink);overflow:hidden;white-space:nowrap;font-weight:700;padding:.4rem 0}
+.strip span{display:inline-block;padding-left:100%;animation:run 28s linear infinite}
+@keyframes run{to{transform:translateX(-100%)}}
+.hero{position:relative;padding:2rem 1rem 4rem;border-bottom:4px solid var(--ink)}
+.hero h1{font-size:clamp(4.2rem,21vw,17rem);margin-left:-.04em}
+.hero h1 .b{display:block;color:var(--blue);margin-left:12vw;-webkit-text-stroke:0}
+.hero h1 .o{display:block;background:var(--ink);color:var(--paper);padding:0 .08em;width:fit-content;transform:rotate(-1.5deg);margin-top:.1em}
+.hero p{max-width:30ch;font-weight:700;font-size:1.25rem;margin:2rem 0 0 auto;background:var(--white);border:4px solid var(--ink);padding:1rem;box-shadow:10px 10px 0 var(--blue);transform:rotate(1.2deg)}
+.stamp{position:absolute;right:1rem;top:1rem;border:4px solid var(--orange);color:var(--orange);padding:.2rem .6rem;font-weight:700;transform:rotate(8deg);font-size:.9rem}
+section{padding:3rem 1rem;border-bottom:4px solid var(--ink)}
+h2{font-size:clamp(3rem,13vw,9rem)}
+.about{display:grid;gap:2rem}
+@media(min-width:820px){.about{grid-template-columns:5fr 7fr}.about .txt{margin-top:6rem}}
+.about h2{color:var(--orange);-webkit-text-stroke:3px var(--ink);paint-order:stroke fill;text-shadow:8px 8px 0 var(--ink)}
+.txt p{margin:0 0 1rem;max-width:46ch;font-size:1.1rem}
+.txt .big{font-family:"Archivo Black",Impact,sans-serif;text-transform:uppercase;font-size:clamp(1.6rem,4vw,2.6rem);line-height:1;background:var(--blue);color:#fff;padding:.6rem;display:inline-block;transform:rotate(-1deg);max-width:none;margin-bottom:1.5rem}
+.proj-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem}
+.proj-head h2{color:var(--blue)}
+.cases{display:grid;gap:1.5rem;margin-top:2.5rem}
+@media(min-width:820px){.cases{grid-template-columns:repeat(12,1fr)}
+.c1{grid-column:1/8}.c2{grid-column:6/13;margin-top:-1rem}.c3{grid-column:2/9}}
+.case{border:4px solid var(--ink);background:var(--white);padding:1.2rem;box-shadow:12px 12px 0 var(--ink);clip-path:polygon(0 0,98% 0,100% 6%,100% 100%,3% 100%,0 94%)}
+.c1{background:var(--orange);color:#0A0A0A}.c2{background:var(--blue);color:#fff}
+.case h3{font-size:clamp(1.8rem,5vw,3.2rem);margin-bottom:.8rem}
+.case p{margin:.3rem 0}
+.redact{display:inline-block;background:#0A0A0A;color:#0A0A0A;user-select:none;padding:0 .3em;cursor:help;transition:color .15s}
+.redact:hover,.redact:focus{color:var(--orange)}
+.found{font-weight:700;border-top:3px dashed currentColor;margin-top:1rem;padding-top:.6rem}
+.serv{background:var(--ink);color:var(--paper)}
+.serv h2{color:var(--orange);margin-left:auto;text-align:right;max-width:9ch}
+.rows{margin-top:2.5rem}
+.row{display:grid;gap:.4rem 2rem;padding:1.4rem 1rem;border-top:4px solid var(--paper);transition:background .12s,color .12s}
+.row:last-child{border-bottom:4px solid var(--paper)}
+.row:nth-child(even){margin-left:6vw}
+.row h3{font-size:clamp(2rem,7vw,5rem)}
+.row p{margin:0;max-width:44ch}
+.row .quien{font-weight:700;color:var(--orange)}
+@media(min-width:820px){.row{grid-template-columns:7fr 5fr;align-items:end}}
+.row:hover{background:var(--orange);color:#0A0A0A}
+.row:hover .quien{color:#0A0A0A}
+.contact{background:var(--blue);color:#fff;border-bottom:0}
+.contact h2{color:#fff}
+.mail{display:block;margin-top:2rem;font-family:"Archivo Black",Impact,sans-serif;font-size:clamp(1.5rem,6.2vw,4.4rem);line-height:1;word-break:break-all;background:var(--orange);color:#0A0A0A;padding:1rem;border:4px solid #0A0A0A;box-shadow:12px 12px 0 #0A0A0A;text-decoration:none;transition:transform .12s}
+.mail:hover{transform:translate(-4px,-4px) rotate(-.5deg)}
+.small{margin-top:2.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-weight:700}
+@media(prefers-reduced-motion:reduce){.strip span{animation:none;padding-left:0}*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="top"><strong>ALEXIS ZAVALLA//</strong><nav><a href="#about">Quién</a><a href="#proyectos">Proyectos</a><a href="#servicios">Servicios</a><a href="#contacto">Contacto</a></nav></div>
+<div class="strip" aria-hidden="true"><span>PENTEST // RED TEAM // AUDITORÍA WEB // INGENIERÍA SOCIAL // INFORME CLARO // PENTEST // RED TEAM // AUDITORÍA WEB // INGENIERÍA SOCIAL // INFORME CLARO //</span></div>
+
+<header class="hero">
+<div class="stamp">CON PERMISO</div>
+<h1>Rompo<span class="b">tu web</span><span class="o">primero.</span></h1>
+<p>Entro a tus sistemas antes que el delincuente, y te entrego el mapa de cada puerta abierta.</p>
+</header>
+
+<section id="about" class="about">
+<h2>Quién soy</h2>
+<div class="txt">
+<p class="big">Hacker. Con contrato firmado.</p>
+<p>Soy consultor de seguridad ofensiva. Pienso como atacante, escribo como humano y reporto sin jerga para que tu equipo pueda arreglar lo que encuentro.</p>
+<p>No vendo miedo ni certificados bonitos. Entrego pruebas: capturas, pasos para reproducir y cómo cerrar cada falla.</p>
+</div>
+</section>
+
+<section id="proyectos">
+<div class="proj-head"><h2>Lo que he protegido</h2></div>
+<div class="cases">
+<article class="case c1"><h3>Tienda online</h3><p>Cliente: <span class="redact" tabindex="0">comercio regional</span></p><p>Auditoría de checkout, sesiones y panel de administración.</p><p class="found">Hallazgo: cualquiera podía ver pedidos ajenos cambiando un número en la URL.</p></article>
+<article class="case c2"><h3>Sitio de medio digital</h3><p>Cliente: <span class="redact" tabindex="0">diario local</span></p><p>Prueba de intrusión sobre CMS, plugins y cuentas de redacción.</p><p class="found">Hallazgo: un plugin sin actualizar daba acceso de editor a un desconocido.</p></article>
+<article class="case c3"><h3>Phishing a la plantilla</h3><p>Cliente: <span class="redact" tabindex="0">pyme agroindustrial</span></p><p>Simulacro de correo falso a todo el equipo, con capacitación posterior.</p><p class="found">Hallazgo: 4 de cada 10 personas entregaron su clave. Lo medimos, lo explicamos, lo repetimos.</p></article>
+</div>
+<p style="margin-top:2rem;font-weight:700">* Casos de ejemplo. Los nombres reales quedan tachados. Pasa el cursor para ver lo que no verás.</p>
+</section>
+
+<section id="servicios" class="serv">
+<h2>Qué rompo</h2>
+<div class="rows">
+<div class="row"><h3>Pentest web y apps</h3><div><p>Busco fallas en tu sitio, tienda o aplicación como lo haría un atacante real.</p><p class="quien">Para: tiendas, medios, startups</p></div></div>
+<div class="row"><h3>Ingeniería social</h3><div><p>Correos falsos, llamadas y pretextos para medir cuánto resiste tu equipo.</p><p class="quien">Para: pymes y equipos con acceso a datos</p></div></div>
+<div class="row"><h3>Red e infraestructura</h3><div><p>Servidores, nube, WiFi y accesos remotos: reviso qué puerta quedó abierta.</p><p class="quien">Para: oficinas, agroindustria, servicios</p></div></div>
+<div class="row"><h3>Informe y capacitación</h3><div><p>Un reporte sin jerga, con pasos para arreglar, y una charla para que no se repita.</p><p class="quien">Va incluido en cada servicio</p></div></div>
+</div>
+</section>
+
+<section id="contacto" class="contact">
+<h2>Ataca primero tu duda</h2>
+<a class="mail" href="mailto:alexzavallam@gmail.com">alexzavallam@gmail.com</a>
+<div class="small"><span>Respuesta en 24 h</span><span>Alcance y precio antes de tocar nada</span></div>
+</section>
+</body>
+</html>
